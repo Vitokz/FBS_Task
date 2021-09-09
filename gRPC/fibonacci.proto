@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "github.com/Vitokz/Task";
+
+package rpc;
+
+
+service Fibonacci {
+  rpc CalculateFibonacci(FibRequest) returns (FibResponse) {}
+}
+
+message FibRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message FibResponse {
+  string numbers = 1;
+}

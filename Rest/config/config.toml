@@ -1,0 +1,7 @@
+[Application]
+HttpPort= "3000"
+LogLevel= "debug"
+LogFormat= "text"
+
+[DateBase]
+Port = "6379"
