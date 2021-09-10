@@ -42,7 +42,7 @@ func (g *GRPCServer) CalculateFibonacci(ctx context.Context, request *FibRequest
 		"to" : to,
 	}).Info()
 
-	resp,err := g.Handler.Fibonacci(fromInt,toInt,ctx)
+	resp,err := g.Handler.Fibonacci(fromInt,toInt)
 	if err != nil {
 		g.Handler.Log.Error(err)
 		return &FibResponse{},err

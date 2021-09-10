@@ -1,28 +1,21 @@
 package repository_test
 
 import (
-	"context"
-	"github.com/Vitokz/Task/Rest/config"
 	"github.com/Vitokz/Task/repository"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestDbConn(t *testing.T) {
-	cfg, err := config.Parse("/home/vitoo/go/src/Task/Rest/config/config_grpc.toml")
-	if !assert.NoError(t, err) {
-		t.Fatal(err)
-	}
-
 	key := "-100"
 	val := "-100"
-	conn := repository.DbConn(cfg.DateBase.Port)
-	err = conn.SetValue(context.Background(), "-100", "-100")
+	conn := repository.DbConn()
+	err := conn.SetValue("-100", "-100")
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}
 
-	value, err := conn.GetValue(context.Background(), key)
+	value, err := conn.GetValue(key)
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

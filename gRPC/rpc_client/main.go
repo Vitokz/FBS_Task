@@ -3,23 +3,18 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/Vitokz/Task/config"
 	"github.com/Vitokz/Task/gRPC/rpc"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
 const (
-	defaultConfigPath = "config/config_grpc.toml"
+	port = "3010"
 )
 
 func main() {
-
 	var log = logrus.New()
-
-	configPath := flag.String("config", defaultConfigPath, "configuration file path")
-	flag.Parse()
-
+    flag.Parse()
 	if flag.NArg() < 2 {
 		log.Fatal("not enough arguments")
 	}
@@ -27,12 +22,7 @@ func main() {
 
 	var to =flag.Arg(1)
 
-	cfg, err := config.Parse(*configPath)
-	if err != nil {
-		log.Fatalf("failed to parse the config file: %v", err)
-	}
-
-	conn,err := grpc.Dial(":"+cfg.Application.Port,grpc.WithInsecure())
+	conn,err := grpc.Dial(":"+port,grpc.WithInsecure())
 
 	c := rpc.NewFibonacciClient(conn)
 
@@ -43,6 +33,7 @@ func main() {
 	if err !=nil {
 		log.Fatal(err)
 	}
+
 	log.Println(res)
 }
 

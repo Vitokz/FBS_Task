@@ -11,7 +11,6 @@ import (
 )
 
 func (r *Rest) Fibbonaci(c echo.Context) error {
-	ctx := c.Request().Context()
 
 	from := c.QueryParam("from")
 	if from == "" {
@@ -61,7 +60,7 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 		"to":    to,
 	}).Info()
 
-	resp, err := r.Handler.Fibonacci(fromInt, toInt, ctx)
+	resp, err := r.Handler.Fibonacci(fromInt, toInt)
 	if err != nil {
 		r.Handler.Log.Error(err)
 		return c.JSON(http.StatusBadRequest, models.Err{
