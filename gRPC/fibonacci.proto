@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/Vitokz/Task";
+option go_package = "github.com/Vitokz/Task/gRPC/rpc";
 
 package rpc;
 

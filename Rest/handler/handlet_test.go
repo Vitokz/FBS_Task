@@ -1,10 +1,10 @@
 package handler_test
 
 import (
-"context"
+	"context"
 	"github.com/Vitokz/Task/Rest/config"
 	"github.com/Vitokz/Task/Rest/handler"
-	"github.com/Vitokz/Task/Rest/repository"
+	"github.com/Vitokz/Task/repository"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -17,10 +17,10 @@ func TestRest_Fibbonaci(t *testing.T) {
 
 	hndlr := handler.Handler{
 		Config: cfg,
-		Db: repository.DbConn(cfg.DateBase.Port),
+		Db:     repository.DbConn(cfg.DateBase.Port),
 	}
 
-	resp,err:=hndlr.Fibonacci("0","10",context.Background())
+	resp,err:=hndlr.Fibonacci(0,10,context.Background())
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

@@ -2,14 +2,14 @@ package repository_test
 
 import (
 	"context"
-	"github.com/Vitokz/Task/gRPC/config"
-	"github.com/Vitokz/Task/gRPC/repository"
+	"github.com/Vitokz/Task/Rest/config"
+	"github.com/Vitokz/Task/repository"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestDbConn(t *testing.T) {
-	cfg, err := config.Parse("/home/vitoo/go/src/Task/gRPC/config/config.toml")
+	cfg, err := config.Parse("/home/vitoo/go/src/Task/Rest/config/config.toml")
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

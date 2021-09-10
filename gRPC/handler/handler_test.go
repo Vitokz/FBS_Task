@@ -4,7 +4,7 @@ import (
 "context"
 "github.com/Vitokz/Task/gRPC/config"
 "github.com/Vitokz/Task/gRPC/handler"
-"github.com/Vitokz/Task/gRPC/repository"
+"github.com/Vitokz/Task/repository"
 "github.com/stretchr/testify/assert"
 "testing"
 )
@@ -20,7 +20,7 @@ func TestRest_Fibbonaci(t *testing.T) {
 		Db: repository.DbConn(cfg.DateBase.Port),
 	}
 
-	resp,err:=hndlr.Fibonacci("0","10",context.Background())
+	resp,err:=hndlr.Fibonacci(0,10,context.Background())
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

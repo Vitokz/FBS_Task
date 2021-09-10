@@ -8,8 +8,8 @@ import (
 
 type Handler struct {
 	Config *config.Config
-	Log    *logrus.Logger
-	Db     Db
+	Log *logrus.Logger
+	Db  Db
 }
 
 type Db interface {

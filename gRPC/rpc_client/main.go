@@ -11,8 +11,6 @@ import (
 
 const (
 	defaultConfigPath = "gRPC/config/config.toml"
-	from="0"
-	to="10"
 )
 
 func main() {
@@ -21,6 +19,13 @@ func main() {
 
 	configPath := flag.String("config", defaultConfigPath, "configuration file path")
 	flag.Parse()
+
+	if flag.NArg() < 2 {
+		log.Fatal("not enough arguments")
+	}
+	var from = flag.Arg(0)
+
+	var to =flag.Arg(1)
 
 	cfg, err := config.Parse(*configPath)
 	if err != nil {
