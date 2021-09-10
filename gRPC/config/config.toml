@@ -1,7 +1,0 @@
-[Application]
-RpcPort= "3010"
-LogLevel= "debug"
-LogFormat= "text"
-
-[DateBase]
-Port = "6379"

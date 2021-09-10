@@ -2,12 +2,12 @@ package handler
 
 import (
 	"context"
-	"github.com/Vitokz/Task/gRPC/config"
 	"github.com/sirupsen/logrus"
 )
 
 type Handler struct {
-	Config *config.Config
+	Port string
+	Name string
 	Log *logrus.Logger
 	Db  Db
 }

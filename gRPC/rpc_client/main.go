@@ -3,14 +3,14 @@ package main
 import (
 	"context"
 	"flag"
-	"github.com/Vitokz/Task/gRPC/config"
+	"github.com/Vitokz/Task/config"
 	"github.com/Vitokz/Task/gRPC/rpc"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
 )
 
 const (
-	defaultConfigPath = "gRPC/config/config.toml"
+	defaultConfigPath = "config/config_grpc.toml"
 )
 
 func main() {
@@ -32,7 +32,7 @@ func main() {
 		log.Fatalf("failed to parse the config file: %v", err)
 	}
 
-	conn,err := grpc.Dial(":"+cfg.Application.RpcPort,grpc.WithInsecure())
+	conn,err := grpc.Dial(":"+cfg.Application.Port,grpc.WithInsecure())
 
 	c := rpc.NewFibonacciClient(conn)
 

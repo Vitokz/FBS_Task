@@ -6,10 +6,16 @@ import (
 	"github.com/Vitokz/Task/functions"
 	"github.com/Vitokz/Task/models"
 	"strconv"
+	"strings"
 )
 
 func (h *Handler) Fibonacci(from , to int,ctx context.Context) (*models.Response,error) {
+	name:=h.Name
+	switch name {
+	case "grpc":
 
+	case "rest":
+	}
 	result := new(models.Response)
 	for ; from <= to; from++ {
 		fromStr := strconv.Itoa(from)
@@ -30,5 +36,6 @@ func (h *Handler) Fibonacci(from , to int,ctx context.Context) (*models.Response
 			result.Numbers += fmt.Sprintf("[%s] = %s, ",fromStr,val)
 		}
 	}
+	result.Numbers=strings.TrimSuffix(result.Numbers,", ")
 	return result,nil
 }

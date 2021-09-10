@@ -8,13 +8,12 @@ import (
 
 type Config struct {
 	Application Application
-	DateBase DateBase
+	DateBase    DateBase
 }
 
 type Application struct {
-	HttpPort string
-	LogLevel  string
-	LogFormat string
+	Name    string
+	Port string
 }
 
 type DateBase struct {
@@ -27,14 +26,8 @@ func (c *Config) validate() error {
 	)
 }
 func (a *Application) validate() error {
-	if a.HttpPort == "" {
-		return errors.New("HttpPort is empty")
-	}
-	if a.LogFormat == "" {
-		return errors.New("LogFormat is empty")
-	}
-	if a.LogLevel == "" {
-		return errors.New("LogLevel is empty")
+	if a.Port == "" {
+		return errors.New("Application Port is empty")
 	}
 	return nil
 }
@@ -67,9 +60,8 @@ func Parse(filepath string) (*Config, error) {
 }
 
 func setDefaults() {
-	viper.SetDefault("Application.Port", "3000")
-	viper.SetDefault("Application.LogLevel", "debug")
-	viper.SetDefault("Application.LogFormat", "text")
+	viper.SetDefault("Application.Port", "3010")
+	viper.SetDefault("Application.Name", "grpc")
 
-	viper.SetDefault("DateBase.Port","6370")
+	viper.SetDefault("DateBase.Port", "6370")
 }

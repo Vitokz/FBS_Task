@@ -5,7 +5,6 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"strconv"
-	"strings"
 )
 
 func (g *GRPCServer) CalculateFibonacci(ctx context.Context, request *FibRequest) (*FibResponse, error) {
@@ -50,6 +49,6 @@ func (g *GRPCServer) CalculateFibonacci(ctx context.Context, request *FibRequest
 	}
 
 	return &FibResponse{
-		Numbers: strings.TrimSuffix(resp.Numbers,", "),
+		Numbers: resp.Numbers,
 	},nil
 }

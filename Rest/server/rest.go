@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	"fmt"
-	"github.com/Vitokz/Task/Rest/handler"
+	"github.com/Vitokz/Task/handler"
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
 	"time"

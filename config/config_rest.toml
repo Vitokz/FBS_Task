@@ -1,0 +1,6 @@
+[Application]
+Name= "rest"
+Port= "3000"
+
+[DateBase]
+Port = "6379"

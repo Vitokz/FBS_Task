@@ -8,7 +8,6 @@ import (
 	"github.com/sirupsen/logrus"
 	"net/http"
 	"strconv"
-	"strings"
 )
 
 func (r *Rest) Fibbonaci(c echo.Context) error {
@@ -70,5 +69,5 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 		})
 	}
 
-	return c.String(http.StatusOK, strings.TrimSuffix(resp.Numbers,",\n"))
+	return c.JSON(http.StatusOK, resp)
 }

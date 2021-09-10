@@ -9,7 +9,7 @@ import (
 )
 
 func TestDbConn(t *testing.T) {
-	cfg, err := config.Parse("/home/vitoo/go/src/Task/Rest/config/config.toml")
+	cfg, err := config.Parse("/home/vitoo/go/src/Task/Rest/config/config_grpc.toml")
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

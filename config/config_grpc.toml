@@ -1,0 +1,6 @@
+[Application]
+Name="grpc"
+Port= "3010"
+
+[DateBase]
+Port = "6379"

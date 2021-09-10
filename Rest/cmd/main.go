@@ -2,9 +2,9 @@ package main
 
 import (
 	"flag"
-	"github.com/Vitokz/Task/Rest/config"
-	"github.com/Vitokz/Task/Rest/handler"
 	"github.com/Vitokz/Task/Rest/server"
+	"github.com/Vitokz/Task/config"
+	"github.com/Vitokz/Task/handler"
 	"github.com/Vitokz/Task/repository"
 	"github.com/labstack/echo/v4"
 	"github.com/sirupsen/logrus"
@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	defaultConfigPath = "Rest/config/config.toml"
+	defaultConfigPath = "config/config_rest.toml"
 )
 
 func main() {
@@ -26,16 +26,13 @@ func main() {
 		log.Fatalf("failed to parse the config file: %v", err)
 	}
 
-	err = configureLogrus(log, cfg)
-	if err != nil {
-		log.Fatalf("failed to configure logrus: %v", err)
-	}
-
 	hndlr := handler.Handler{
-		Config: cfg,
+		Name: cfg.Application.Name,
+		Port: cfg.Application.Port,
 		Log:    log,
 		Db:     repository.DbConn(cfg.DateBase.Port),
 	}
+
 	router := echo.New()
 
 	rest := server.Rest{
@@ -43,19 +40,8 @@ func main() {
 		Handler: &hndlr,
 	}
 	rest.Route()
-	server.Start(router, hndlr.Config.Application.HttpPort)
+	server.Start(router, hndlr.Port)
 	defer server.Stop(router, time.Hour*2)
 }
 
-func configureLogrus(logger *logrus.Logger, cfg *config.Config) error {
-	lvl, err := logrus.ParseLevel(cfg.Application.LogLevel)
-	if err != nil {
-		return err
-	}
-	logger.SetLevel(lvl)
-	if cfg.Application.LogLevel == "text" {
-		text := logrus.TextFormatter{}
-		logger.SetFormatter(&text)
-	}
-	return nil
-}
+

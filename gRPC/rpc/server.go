@@ -1,7 +1,7 @@
 package rpc
 
 import (
-   "github.com/Vitokz/Task/gRPC/handler"
+	"github.com/Vitokz/Task/handler"
 )
 
 type GRPCServer struct {
