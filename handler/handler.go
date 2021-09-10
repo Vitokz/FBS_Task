@@ -12,6 +12,6 @@ type Handler struct {
 }
 
 type Db interface {
-	SetValue(key string, value string) error
-	GetValue(key string) (string, error)
+	SetFibonacci(key int,value int) error
+	GetFibonacci(key int) (string,error)
 }

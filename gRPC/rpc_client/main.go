@@ -28,7 +28,7 @@ func main() {
 
 	res,err :=c.CalculateFibonacci(context.Background(),&rpc.FibRequest{
 		From: from,
-		To:to,
+		To: to,
 	})
 	if err !=nil {
 		log.Fatal(err)

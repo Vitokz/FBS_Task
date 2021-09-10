@@ -7,15 +7,14 @@ import (
 )
 
 func TestDbConn(t *testing.T) {
-	key := "-100"
 	val := "-100"
 	conn := repository.DbConn()
-	err := conn.SetValue("-100", "-100")
+	err := conn.SetFibonacci(-100, -100)
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}
 
-	value, err := conn.GetValue(key)
+	value, err := conn.GetFibonacci(-100)
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}

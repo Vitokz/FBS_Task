@@ -14,7 +14,7 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 
 	from := c.QueryParam("from")
 	if from == "" {
-		from = "0"
+		from = "1"
 	}
 	fromInt, err := strconv.Atoi(from)
 	if err != nil {
@@ -48,9 +48,9 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"to\" param is less than \"from\"")),
 		})
-	}else if toInt >91 {
+	}else if toInt >92 {
 		return c.JSON(http.StatusBadRequest, models.Err{
-			Error: fmt.Sprintf("%v", errors.New("\"to\" param must be less than or equal to 91")),
+			Error: fmt.Sprintf("%v", errors.New("\"to\" param must be less than or equal to 92")),
 		})
 	}
 

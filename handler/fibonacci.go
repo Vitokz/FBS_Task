@@ -7,17 +7,17 @@ import (
 	"strings"
 )
 
-var lastAddedInDB = 1
+var lastAddedInDB = 2
 
 func (h *Handler) Fibonacci(from , to int) (*models.Response,error) {
 	result := new(models.Response)
 	for ; from <= to; from++ {
 		fromStr := strconv.Itoa(from)
-		val, err := h.Db.GetValue(fromStr)
+		val, err := h.Db.GetFibonacci(from)
 		if err != nil {
-			fib := strconv.Itoa(h.calculateFibonacciNumber(from))
-			result.Numbers += fmt.Sprintf("[%s] = %s, ",fromStr,fib)
-			if err := h.Db.SetValue(fromStr, fib); err != nil {
+			fib := h.calculateFibonacciNumber(from)
+			result.Numbers += fmt.Sprintf("[%s] = %s, ",fromStr,strconv.Itoa(fib))
+			if err := h.Db.SetFibonacci(from, fib); err != nil {
 				return nil, err
 			}
 			lastAddedInDB=from
@@ -30,21 +30,30 @@ func (h *Handler) Fibonacci(from , to int) (*models.Response,error) {
 }
 
 func (h *Handler) calculateFibonacciNumber(n int) int {
-	if n == 0 {
-		return 0
-	}
 
 	i:=lastAddedInDB+1
-	aStr,_ := h.Db.GetValue(strconv.Itoa(i-2))
-	bStr,_ := h.Db.GetValue(strconv.Itoa(i-1))
+	aStr,_ := h.Db.GetFibonacci(i-2)
+	bStr,_ := h.Db.GetFibonacci(i-1)
 
 	a,_:=strconv.Atoi(aStr)
 	b,_:=strconv.Atoi(bStr)
-	for i:=lastAddedInDB+1; i < n; i++ {
-		с := a + b
+	c:=0
+	//h.Log.WithFields(logrus.Fields{
+	//	"i":i,
+	//	"a":a,
+	//	"b":b,
+	//}).Info()
+	for ; i <= n; i++ {
+		//h.Log.WithFields(logrus.Fields{
+		//	"i":i,
+		//	"a":a,
+		//	"b":b,
+		//}).Info()
+		c = a + b
 		a = b
-		b = с
+		b = c
+		h.Db.SetFibonacci(i,c)
 	}
 
-	return a + b
+	return c
 }

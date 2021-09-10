@@ -3,19 +3,22 @@ package handler_test
 import (
 	"github.com/Vitokz/Task/handler"
 	"github.com/Vitokz/Task/repository"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestRest_Fibbonaci(t *testing.T) {
+	log := logrus.Logger{}
 	hndlr := handler.Handler{
+		Log: &log,
 		Db: repository.DbConn(),
 	}
 
-	resp,err:=hndlr.Fibonacci(0,10)
+	resp,err:=hndlr.Fibonacci(1,10)
 	if !assert.NoError(t, err) {
 		t.Fatal(err)
 	}
 
-	assert.Equalf(t, "[0] = 0, [1] = 1, [2] = 1, [3] = 2, [4] = 3, [5] = 5, [6] = 8, [7] = 13, [8] = 21, [9] = 34, [10] = 55",resp.Numbers,"failed")
+	assert.Equalf(t, "[1] = 0, [2] = 1, [3] = 1, [4] = 2, [5] = 3, [6] = 5, [7] = 8, [8] = 13, [9] = 21, [10] = 34",resp.Numbers,"failed")
 }
