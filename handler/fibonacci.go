@@ -20,6 +20,7 @@ func (h *Handler) Fibonacci(from , to int) (*models.Response,error) {
 			if err := h.Db.SetValue(fromStr, fib); err != nil {
 				return nil, err
 			}
+			lastAddedInDB=from
 		} else {
 			result.Numbers += fmt.Sprintf("[%s] = %s, ",fromStr,val)
 		}
