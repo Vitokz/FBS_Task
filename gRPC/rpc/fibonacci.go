@@ -17,8 +17,8 @@ func (g *GRPCServer) CalculateFibonacci(ctx context.Context, request *FibRequest
 	fromInt, err := strconv.Atoi(from)
 	if err != nil {
 		return nil, errors.New("\"from\" param is not number")
-	} else if fromInt < 0 {
-		return nil, errors.New("\"from\" param is minus")
+	} else if fromInt < 1 {
+		return nil, errors.New("\"from\" param is minus or null")
 	}
 
 	to := request.GetTo()
