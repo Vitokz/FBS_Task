@@ -21,9 +21,9 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"from\" param is not number")),
 		})
-	} else if fromInt < 0 {
+	} else if fromInt < 1 {
 		return c.JSON(http.StatusBadRequest, models.Err{
-			Error: fmt.Sprintf("%v", errors.New("\"from\" param is minus")),
+			Error: fmt.Sprintf("%v", errors.New("\"from\" param is minus or null")),
 		})
 	}
 
@@ -40,15 +40,15 @@ func (r *Rest) Fibbonaci(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"to\" param is not number")),
 		})
-	}else if toInt < 0 {
+	} else if toInt < 0 {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"to\" param is minus")),
 		})
-	}else if toInt < fromInt {
+	} else if toInt < fromInt {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"to\" param is less than \"from\"")),
 		})
-	}else if toInt >92 {
+	} else if toInt > 92 {
 		return c.JSON(http.StatusBadRequest, models.Err{
 			Error: fmt.Sprintf("%v", errors.New("\"to\" param must be less than or equal to 92")),
 		})
