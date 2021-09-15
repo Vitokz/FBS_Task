@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.27.1
 // 	protoc        v3.6.1
-// source: fibonacci.proto
+// source: gRPC/fibonacci.proto
 
 package rpc
 
@@ -32,7 +32,7 @@ type FibRequest struct {
 func (x *FibRequest) Reset() {
 	*x = FibRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fibonacci_proto_msgTypes[0]
+		mi := &file_gRPC_fibonacci_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -45,7 +45,7 @@ func (x *FibRequest) String() string {
 func (*FibRequest) ProtoMessage() {}
 
 func (x *FibRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_fibonacci_proto_msgTypes[0]
+	mi := &file_gRPC_fibonacci_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *FibRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FibRequest.ProtoReflect.Descriptor instead.
 func (*FibRequest) Descriptor() ([]byte, []int) {
-	return file_fibonacci_proto_rawDescGZIP(), []int{0}
+	return file_gRPC_fibonacci_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *FibRequest) GetFrom() string {
@@ -80,13 +80,13 @@ type FibResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Numbers string `protobuf:"bytes,1,opt,name=numbers,proto3" json:"numbers,omitempty"`
+	Numbers []*FibStruct `protobuf:"bytes,1,rep,name=numbers,proto3" json:"numbers,omitempty"`
 }
 
 func (x *FibResponse) Reset() {
 	*x = FibResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_fibonacci_proto_msgTypes[1]
+		mi := &file_gRPC_fibonacci_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -99,7 +99,7 @@ func (x *FibResponse) String() string {
 func (*FibResponse) ProtoMessage() {}
 
 func (x *FibResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_fibonacci_proto_msgTypes[1]
+	mi := &file_gRPC_fibonacci_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,69 +112,132 @@ func (x *FibResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FibResponse.ProtoReflect.Descriptor instead.
 func (*FibResponse) Descriptor() ([]byte, []int) {
-	return file_fibonacci_proto_rawDescGZIP(), []int{1}
+	return file_gRPC_fibonacci_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FibResponse) GetNumbers() string {
+func (x *FibResponse) GetNumbers() []*FibStruct {
 	if x != nil {
 		return x.Numbers
 	}
-	return ""
+	return nil
 }
 
-var File_fibonacci_proto protoreflect.FileDescriptor
+type FibStruct struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-var file_fibonacci_proto_rawDesc = []byte{
-	0x0a, 0x0f, 0x66, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x12, 0x03, 0x72, 0x70, 0x63, 0x22, 0x30, 0x0a, 0x0a, 0x46, 0x69, 0x62, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x12, 0x0e, 0x0a, 0x02, 0x74, 0x6f, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x74, 0x6f, 0x22, 0x27, 0x0a, 0x0b, 0x46, 0x69, 0x62, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6e, 0x75, 0x6d, 0x62, 0x65,
-	0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72,
-	0x73, 0x32, 0x46, 0x0a, 0x09, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x12, 0x39,
-	0x0a, 0x12, 0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x46, 0x69, 0x62, 0x6f, 0x6e,
-	0x61, 0x63, 0x63, 0x69, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x46, 0x69, 0x62, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x18, 0x5a, 0x16, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x56, 0x69, 0x74, 0x6f, 0x6b, 0x7a, 0x2f, 0x54,
-	0x61, 0x73, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	Index int64 `protobuf:"varint,1,opt,name=index,proto3" json:"index,omitempty"`
+	Value int64 `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *FibStruct) Reset() {
+	*x = FibStruct{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_gRPC_fibonacci_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FibStruct) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FibStruct) ProtoMessage() {}
+
+func (x *FibStruct) ProtoReflect() protoreflect.Message {
+	mi := &file_gRPC_fibonacci_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FibStruct.ProtoReflect.Descriptor instead.
+func (*FibStruct) Descriptor() ([]byte, []int) {
+	return file_gRPC_fibonacci_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *FibStruct) GetIndex() int64 {
+	if x != nil {
+		return x.Index
+	}
+	return 0
+}
+
+func (x *FibStruct) GetValue() int64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+var File_gRPC_fibonacci_proto protoreflect.FileDescriptor
+
+var file_gRPC_fibonacci_proto_rawDesc = []byte{
+	0x0a, 0x14, 0x67, 0x52, 0x50, 0x43, 0x2f, 0x66, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x03, 0x72, 0x70, 0x63, 0x22, 0x30, 0x0a, 0x0a, 0x46,
+	0x69, 0x62, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x66, 0x72, 0x6f,
+	0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x12, 0x0e, 0x0a,
+	0x02, 0x74, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x74, 0x6f, 0x22, 0x37, 0x0a,
+	0x0b, 0x46, 0x69, 0x62, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x28, 0x0a, 0x07,
+	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0e, 0x2e,
+	0x72, 0x70, 0x63, 0x2e, 0x46, 0x69, 0x62, 0x53, 0x74, 0x72, 0x75, 0x63, 0x74, 0x52, 0x07, 0x6e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x73, 0x22, 0x37, 0x0a, 0x09, 0x46, 0x69, 0x62, 0x53, 0x74, 0x72,
+	0x75, 0x63, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x05, 0x69, 0x6e, 0x64, 0x65, 0x78, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c,
+	0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32,
+	0x46, 0x0a, 0x09, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63, 0x63, 0x69, 0x12, 0x39, 0x0a, 0x12,
+	0x43, 0x61, 0x6c, 0x63, 0x75, 0x6c, 0x61, 0x74, 0x65, 0x46, 0x69, 0x62, 0x6f, 0x6e, 0x61, 0x63,
+	0x63, 0x69, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x10, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x46, 0x69, 0x62, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x21, 0x5a, 0x1f, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x56, 0x69, 0x74, 0x6f, 0x6b, 0x7a, 0x2f, 0x54, 0x61, 0x73,
+	0x6b, 0x2f, 0x67, 0x52, 0x50, 0x43, 0x2f, 0x72, 0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
-	file_fibonacci_proto_rawDescOnce sync.Once
-	file_fibonacci_proto_rawDescData = file_fibonacci_proto_rawDesc
+	file_gRPC_fibonacci_proto_rawDescOnce sync.Once
+	file_gRPC_fibonacci_proto_rawDescData = file_gRPC_fibonacci_proto_rawDesc
 )
 
-func file_fibonacci_proto_rawDescGZIP() []byte {
-	file_fibonacci_proto_rawDescOnce.Do(func() {
-		file_fibonacci_proto_rawDescData = protoimpl.X.CompressGZIP(file_fibonacci_proto_rawDescData)
+func file_gRPC_fibonacci_proto_rawDescGZIP() []byte {
+	file_gRPC_fibonacci_proto_rawDescOnce.Do(func() {
+		file_gRPC_fibonacci_proto_rawDescData = protoimpl.X.CompressGZIP(file_gRPC_fibonacci_proto_rawDescData)
 	})
-	return file_fibonacci_proto_rawDescData
+	return file_gRPC_fibonacci_proto_rawDescData
 }
 
-var file_fibonacci_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_fibonacci_proto_goTypes = []interface{}{
+var file_gRPC_fibonacci_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_gRPC_fibonacci_proto_goTypes = []interface{}{
 	(*FibRequest)(nil),  // 0: rpc.FibRequest
 	(*FibResponse)(nil), // 1: rpc.FibResponse
+	(*FibStruct)(nil),   // 2: rpc.FibStruct
 }
-var file_fibonacci_proto_depIdxs = []int32{
-	0, // 0: rpc.Fibonacci.CalculateFibonacci:input_type -> rpc.FibRequest
-	1, // 1: rpc.Fibonacci.CalculateFibonacci:output_type -> rpc.FibResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+var file_gRPC_fibonacci_proto_depIdxs = []int32{
+	2, // 0: rpc.FibResponse.numbers:type_name -> rpc.FibStruct
+	0, // 1: rpc.Fibonacci.CalculateFibonacci:input_type -> rpc.FibRequest
+	1, // 2: rpc.Fibonacci.CalculateFibonacci:output_type -> rpc.FibResponse
+	2, // [2:3] is the sub-list for method output_type
+	1, // [1:2] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_fibonacci_proto_init() }
-func file_fibonacci_proto_init() {
-	if File_fibonacci_proto != nil {
+func init() { file_gRPC_fibonacci_proto_init() }
+func file_gRPC_fibonacci_proto_init() {
+	if File_gRPC_fibonacci_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_fibonacci_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_gRPC_fibonacci_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FibRequest); i {
 			case 0:
 				return &v.state
@@ -186,8 +249,20 @@ func file_fibonacci_proto_init() {
 				return nil
 			}
 		}
-		file_fibonacci_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_gRPC_fibonacci_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FibResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_gRPC_fibonacci_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*FibStruct); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -203,18 +278,18 @@ func file_fibonacci_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_fibonacci_proto_rawDesc,
+			RawDescriptor: file_gRPC_fibonacci_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_fibonacci_proto_goTypes,
-		DependencyIndexes: file_fibonacci_proto_depIdxs,
-		MessageInfos:      file_fibonacci_proto_msgTypes,
+		GoTypes:           file_gRPC_fibonacci_proto_goTypes,
+		DependencyIndexes: file_gRPC_fibonacci_proto_depIdxs,
+		MessageInfos:      file_gRPC_fibonacci_proto_msgTypes,
 	}.Build()
-	File_fibonacci_proto = out.File
-	file_fibonacci_proto_rawDesc = nil
-	file_fibonacci_proto_goTypes = nil
-	file_fibonacci_proto_depIdxs = nil
+	File_gRPC_fibonacci_proto = out.File
+	file_gRPC_fibonacci_proto_rawDesc = nil
+	file_gRPC_fibonacci_proto_goTypes = nil
+	file_gRPC_fibonacci_proto_depIdxs = nil
 }

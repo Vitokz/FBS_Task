@@ -15,5 +15,10 @@ message FibRequest {
 }
 
 message FibResponse {
-  string numbers = 1;
+  repeated FibStruct numbers = 1  ;
+}
+
+message FibStruct {
+   int64 index =1;
+   int64 value =2;
 }

@@ -2,6 +2,7 @@ package rpc
 
 import (
 	"context"
+	"github.com/Vitokz/Task/models"
 	"github.com/pkg/errors"
 	"github.com/sirupsen/logrus"
 	"strconv"
@@ -44,13 +45,24 @@ func (g *GRPCServer) CalculateFibonacci(ctx context.Context, request *FibRequest
 		"to":    to,
 	}).Info()
 
-	resp, err := g.Handler.Fibonacci(fromInt, toInt)
+	unResp, err := g.Handler.Fibonacci(fromInt, toInt)
 	if err != nil {
 		g.Handler.Log.Error(err)
 		return &FibResponse{}, err
 	}
 
-	return &FibResponse{
-		Numbers: resp.Numbers,
-	}, nil
+	resp := sorting(unResp)
+
+	return resp, nil
+}
+
+func sorting (resp *models.Response) *FibResponse {
+	result := new(FibResponse)
+	for i :=range resp.Numbers {
+		result.Numbers = append(result.Numbers, &FibStruct{
+              Index: int64(resp.Numbers[i].Index),
+              Value: int64(resp.Numbers[i].Fibonacci),
+		})
+	}
+	return result
 }

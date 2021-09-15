@@ -97,5 +97,5 @@ var Fibonacci_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "fibonacci.proto",
+	Metadata: "gRPC/fibonacci.proto",
 }

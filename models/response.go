@@ -1,7 +1,12 @@
 package models
 
 type Response struct {
-	Numbers string `json:"numbers"`
+	Numbers []Fibonacci `json:"numbers"`
+}
+
+type Fibonacci struct {
+	Index int  `json:"index"`
+	Fibonacci int `json:"value"`
 }
 
 type Err struct{
